@@ -46,6 +46,8 @@ class Database:
         params = (name, email, country)
         cursor.execute(query,params)
         cursor.execute("COMMIT")
+        
+        #insert into joined table
     
     #insert into products table
     def insert_product(self, name):
@@ -54,6 +56,8 @@ class Database:
         params = (name,)
         cursor.execute(query,params)
         cursor.execute("COMMIT")
+        
+        #insert into joined table
         
         
 

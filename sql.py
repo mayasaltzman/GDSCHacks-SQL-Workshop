@@ -17,6 +17,18 @@ class Database:
     
     #creating tables
     def create_tables(self):
+        #Customers Table
+        self.conn.execute("""CREATE TABLE IF NOT EXISTS Customers 
+                 ( CUSTOMER_ID     INTEGER NOT NULL AUTO_INCREMENT,
+                   CUSTOMER_NAME   VARCHAR(MAX) NOT NULL,
+                   CUSTOMER_EMAIL  VARCHAR(MAX) NOT NULL,
+                   CUSTOMER_COUNTRY VARCHAR(3) NOT NULL,
+                   PRIMARY KEY (CUSTOMER_ID) );""" )
+        
+        
+        #Orders Table
+        
+        #Product Table
         
     #inserting tables
     #def insert(self):

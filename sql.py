@@ -6,7 +6,7 @@ import os
 class Database:
     
     #create database connection to store it as class attributes
-    def __init__(self, reset = False):
+    def __init__(self, reset = True):
         #if database already exists remove it
         if (reset == True):
             if os.path.exists('orders.db'):
@@ -39,8 +39,22 @@ class Database:
         
         
         
-    #inserting tables
-    #def insert(self):
+    #inserting into customer table
+    def insert_customer(self, name, email, country):
+        cursor = self.conn.cursor()
+        query = "INSERT INTO Customers (CUSTOMER_NAME,CUSTOMER_EMAIL,CUSTOMER_COUNTRY) VALUES (?,?,?)"
+        params = (name, email, country)
+        cursor.execute(query,params)
+        cursor.execute("COMMIT")
+    
+    #insert into products table
+    def insert_product(self, name):
+        cursor = self.conn.cursor()
+        query = "INSERT INTO Products (PRODUCT_NAME) VALUES (?)"
+        params = (name,)
+        cursor.execute(query,params)
+        cursor.execute("COMMIT")
+        
         
 
     #querying data
@@ -49,5 +63,14 @@ class Database:
     
     #our main for testing sake
 if __name__ == "__main__":
-    db = Database()
+    db = Database() 
+    
+    #creating tables
     db.create_tables()
+    
+    #inserting customers
+    db.insert_customer("Maya Saltzman", "mayasaltzman3@gmail.com", "CAN")
+    db.insert_customer("Poppy Shepherd", "poppy_awesome_dawg@gmail.com", "CAN")
+    
+    #inserting products
+    db.insert_product("Dyson Vaccum")

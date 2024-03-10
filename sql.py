@@ -19,16 +19,27 @@ class Database:
     def create_tables(self):
         #Customers Table
         self.conn.execute("""CREATE TABLE IF NOT EXISTS Customers 
-                 ( CUSTOMER_ID     INTEGER NOT NULL AUTO_INCREMENT,
+                 ( CUSTOMER_ID     INTEGER NOT NULL AUTOINCREMENT,
                    CUSTOMER_NAME   VARCHAR(MAX) NOT NULL,
                    CUSTOMER_EMAIL  VARCHAR(MAX) NOT NULL,
                    CUSTOMER_COUNTRY VARCHAR(3) NOT NULL,
                    PRIMARY KEY (CUSTOMER_ID) );""" )
         
-        
         #Orders Table
+        self.conn.execute("""CREATE TABLE IF NOT EXISTS Orders 
+                 ( ORDER_ID     INTEGER NOT NULL AUTO_INCREMENT,
+                   CUSTOMER_ID   INTEGER NOT NULL,
+                   PRODUCT_CODE  INTEGER NOT NULL,
+                   PRIMARY KEY (ORDER_ID),
+                   FOREIGN KEY (CUSTOMER_ID) REFERENCES Customers,
+                   FORIEGN KEY (PRODUCT_CODE) REFERENCES Products);""" )
         
-        #Product Table
+        #Products Table
+        self.conn.execute("""CREATE TABLE IF NOT EXISTS Products 
+                 ( PRODUCT_CODE     INTEGER NOT NULL AUTO_INCREMENT,
+                   PRODUCT_NAME   VARCHAR(MAX) NOT NULL,
+                   PRIMARY KEY (PRODUCT_CODE) );""" )
+        
         
     #inserting tables
     #def insert(self):
@@ -37,3 +48,7 @@ class Database:
     #querying data
     #advanced querys and joins
     #data aggregation
+    
+    #our main for testing sake
+    if __name__ == "__main__":
+        db = 0

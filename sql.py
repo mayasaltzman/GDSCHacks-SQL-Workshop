@@ -2,7 +2,7 @@
 import sqlite3
 import os
 
-#we are going to use this class to perform operations on our databse
+#we are going to use this class to perform operations on our database
 class Database:
     
     #create database connection to store it as class attributes
@@ -10,7 +10,7 @@ class Database:
         #if database already exists remove it
         if (reset == True):
             if os.path.exists('orders.db'):
-                os.remove('orders.db')
+                os.remove('orders.db')  
                 
         #creates database connection to the database we are going to work with
         self.conn = sqlite3.connect('orders.db')
@@ -47,7 +47,6 @@ class Database:
         cursor.execute(query,params)
         cursor.execute("COMMIT")
         
-        #insert into joined table
     
     #insert into products table
     def insert_product(self, name):
@@ -56,13 +55,21 @@ class Database:
         params = (name,)
         cursor.execute(query,params)
         cursor.execute("COMMIT")
+    
+    #insert into orders table
+    def insert_orders(self, customer_id, product_code):
+        cursor = self.conn.cursor()
+        query = "INSERT INTO Orders (CUSTOMER_ID, PRODUCT_CODE) VALUES (?,?)"
+        params = (customer_id,product_code)
+        cursor.execute(query,params)
+        cursor.execute("COMMIT")
         
-        #insert into joined table
-        
-        
-
+    
     #querying data
+    #select, where, >=, 
+    
     #advanced querys and joins
+    
     #data aggregation
     
     #our main for testing sake
@@ -78,3 +85,5 @@ if __name__ == "__main__":
     
     #inserting products
     db.insert_product("Dyson Vaccum")
+    
+    db.insert_orders(1,1)

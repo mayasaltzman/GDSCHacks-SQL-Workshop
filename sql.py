@@ -63,6 +63,14 @@ class Database:
         params = (customer_id,product_code)
         cursor.execute(query,params)
         cursor.execute("COMMIT")
+    
+    #updating a value
+    def update_data(self):
+        cursor = self.conn.cursor()
+        query = "UPDATE Customers SET CUSTOMER_COUNTRY = (?) WHERE CUSTOMER_ID = (?)" 
+        params = ("USA", 1)
+        cursor.execute(query,params)
+        cursor.execute("COMMIT")
         
     
     #querying data
@@ -86,4 +94,8 @@ if __name__ == "__main__":
     #inserting products
     db.insert_product("Dyson Vaccum")
     
+    #inserting an order
     db.insert_orders(1,1)
+    
+    #updating data in Customers
+    db.update_data()

@@ -72,9 +72,31 @@ class Database:
         cursor.execute(query,params)
         cursor.execute("COMMIT")
         
-    
     #querying data
-    #select, where, >=, 
+    #select, where, >=,
+    def query_data(self):
+         cursor = self.conn.cursor()
+         
+         #basic select
+        #  query = "SELECT * FROM Customers"
+        #  toPrint = cursor.execute(query).fetchall()
+        #  print(toPrint)
+         
+         #select specific column
+        #  query = "SELECT PRODUCT_NAME FROM Products"
+        #  toPrint = cursor.execute(query).fetchall()
+        #  print(toPrint)
+         
+         #select with a where clause
+        #  query = "SELECT * FROM Customers WHERE CUSTOMER_ID >= (?) and CUSTOMER_COUNTRY = (?)"
+        #  params = (1,"CAN")
+        #  toPrint = cursor.execute(query,params).fetchall()
+        #  print(toPrint)
+         
+         #select with order by
+         query = "SELECT * FROM Customers ORDER BY CUSTOMER_ID DESC"
+         toPrint = cursor.execute(query).fetchall()
+         print(toPrint)
     
     #advanced querys and joins
     
@@ -99,3 +121,5 @@ if __name__ == "__main__":
     
     #updating data in Customers
     db.update_data()
+    
+    db.query_data()

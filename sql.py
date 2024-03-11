@@ -99,6 +99,13 @@ class Database:
          print(toPrint)
     
     #advanced querys and joins
+    def advanced_query(self):
+        cursor = self.conn.cursor()
+        
+        #query that joins orders, products, and customers into one table on their common ID
+        query = "SELECT Orders.ORDER_ID, Products.PRODUCT_CODE, Products.PRODUCT_NAME, Customers.CUSTOMER_NAME, Customers.CUSTOMER_EMAIL FROM Orders INNER JOIN Customers ON Customers.CUSTOMER_ID = Orders.CUSTOMER_ID INNER JOIN Products ON Orders.PRODUCT_CODE = Products.PRODUCT_CODE"
+        toPrint = cursor.execute(query).fetchall()
+        print(toPrint)
     
     #data aggregation
     
@@ -112,14 +119,24 @@ if __name__ == "__main__":
     #inserting customers
     db.insert_customer("Maya Saltzman", "mayasaltzman3@gmail.com", "CAN")
     db.insert_customer("Poppy Shepherd", "poppy_awesome_dawg@gmail.com", "CAN")
+    db.insert_customer("Andrea Luis Gaudet", "aluisgau@gmail.com", "USA")
     
     #inserting products
     db.insert_product("Dyson Vaccum")
+    db.insert_product("Dyson Hair Dryer")
     
     #inserting an order
     db.insert_orders(1,1)
+    db.insert_orders(3,1)
+    db.insert_orders(2,2)
+    db.insert_orders(2,1)
+    
     
     #updating data in Customers
-    db.update_data()
+    #db.update_data()
     
-    db.query_data()
+    #db.query_data()
+    
+    db.advanced_query()
+    
+    

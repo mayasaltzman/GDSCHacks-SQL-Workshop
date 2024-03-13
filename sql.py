@@ -93,6 +93,8 @@ class Database:
         #  params = (1,"CAN")
         #  toPrint = cursor.execute(query,params).fetchall()
         #  print(toPrint)
+        
+        #outline that you can use or and and in their where clauses too and the term like
          
          #select with order by
          #query = "SELECT * FROM Customers ORDER BY CUSTOMER_ID DESC"
@@ -121,15 +123,30 @@ class Database:
     def aggregate_data(self):
         cursor = self.conn.cursor()
         
-        #count
-        query = "SELECT COUNT(CUSTOMER_ID) FROM Customers"
+        #count how many customers we have
+        # query = "SELECT COUNT(CUSTOMER_ID) FROM Customers"
+        # toPrint = cursor.execute(query).fetchall()
+        # print(toPrint)
+        
+        #find the amount of money a single person has spent on an order
+        # query = "SELECT SUM(Products.PRICE) FROM Orders INNER JOIN Products ON Orders.PRODUCT_CODE = Products.PRODUCT_CODE where Orders.CUSTOMER_ID = 2"
+        # toPrint = cursor.execute(query).fetchall()
+        # print(toPrint)
+        
+        #find the max price 
+        # query = "SELECT MAX(PRICE) FROM Products"
+        # toPrint = cursor.execute(query).fetchall()
+        # print(toPrint)
+        
+        #find the min price
+        # query = "SELECT MIN(PRICE) FROM Products"
+        # toPrint = cursor.execute(query).fetchall()
+        # print(toPrint)
+        
+        # #find the avg price
+        query = "SELECT AVG(PRICE) FROM Products"
         toPrint = cursor.execute(query).fetchall()
         print(toPrint)
-        
-        #sum
-        #min
-        #max
-        #avg
     
     #our main for testing sake
 if __name__ == "__main__":

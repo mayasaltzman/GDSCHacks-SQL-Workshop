@@ -22,13 +22,13 @@ class Database:
                  ( CUSTOMER_ID     INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                    CUSTOMER_NAME   VARCHAR NOT NULL,
                    CUSTOMER_EMAIL  VARCHAR NOT NULL,
-                   CUSTOMER_COUNTRY VARCHAR(3) NOT NULL );""" )
+                   CUSTOMER_COUNTRY VARCHAR(3) NOT NULL )""" )
         
         #Products Table
         self.conn.execute("""CREATE TABLE IF NOT EXISTS Products 
                  ( PRODUCT_CODE     INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                    PRODUCT_NAME   VARCHAR NOT NULL,
-                   PRICE          FLOAT NOT NULL);""" )
+                   PRICE          FLOAT NOT NULL)""" )
         
         #Orders Table
         self.conn.execute("""CREATE TABLE IF NOT EXISTS Orders 
@@ -36,7 +36,7 @@ class Database:
                    CUSTOMER_ID   INTEGER NOT NULL,
                    PRODUCT_CODE  INTEGER NOT NULL,
                    FOREIGN KEY (CUSTOMER_ID) REFERENCES Customers,
-                   FOREIGN KEY (PRODUCT_CODE) REFERENCES Products);""" )
+                   FOREIGN KEY (PRODUCT_CODE) REFERENCES Products)""" )
         
         
         
@@ -69,9 +69,13 @@ class Database:
     def update_data(self):
         cursor = self.conn.cursor()
         query = "UPDATE Customers SET CUSTOMER_COUNTRY = (?) WHERE CUSTOMER_ID = (?)" 
-        params = ("USA", 1)
-        cursor.execute(query,params)
-        cursor.execute("COMMIT")
+        # params = ("USA", 1)
+        # cursor.execute(query,params)
+        # cursor.execute("COMMIT")
+        
+        query = "DELETE FROM Customers WHERE CUSTOMER_ID = (?)"
+        
+        
         
     #querying data
     #select, where, >=,
@@ -79,9 +83,9 @@ class Database:
          cursor = self.conn.cursor()
          
          #basic select
-        #  query = "SELECT * FROM Customers"
-        #  toPrint = cursor.execute(query).fetchall()
-        #  print(toPrint)
+         query = "SELECT * FROM Customers"
+         toPrint = cursor.execute(query).fetchall()
+         print(toPrint)
          
          #select specific column
         #  query = "SELECT PRODUCT_NAME FROM Products"

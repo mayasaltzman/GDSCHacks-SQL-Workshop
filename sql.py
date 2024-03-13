@@ -27,7 +27,8 @@ class Database:
         #Products Table
         self.conn.execute("""CREATE TABLE IF NOT EXISTS Products 
                  ( PRODUCT_CODE     INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                   PRODUCT_NAME   VARCHAR NOT NULL );""" )
+                   PRODUCT_NAME   VARCHAR NOT NULL,
+                   PRICE          FLOAT NOT NULL);""" )
         
         #Orders Table
         self.conn.execute("""CREATE TABLE IF NOT EXISTS Orders 
@@ -49,10 +50,10 @@ class Database:
         
     
     #insert into products table
-    def insert_product(self, name):
+    def insert_product(self, name, price):
         cursor = self.conn.cursor()
-        query = "INSERT INTO Products (PRODUCT_NAME) VALUES (?)"
-        params = (name,)
+        query = "INSERT INTO Products (PRODUCT_NAME, PRICE) VALUES (?,?)"
+        params = (name,price)
         cursor.execute(query,params)
         cursor.execute("COMMIT")
     
@@ -143,8 +144,8 @@ if __name__ == "__main__":
     db.insert_customer("Andrea Luis Gaudet", "aluisgau@gmail.com", "USA")
     
     #inserting products
-    db.insert_product("Dyson Vaccum")
-    db.insert_product("Dyson Hair Dryer")
+    db.insert_product("Dyson Vaccum",100.22)
+    db.insert_product("Dyson Hair Dryer",50.99)
     
     #inserting an order
     db.insert_orders(1,1)

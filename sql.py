@@ -94,7 +94,12 @@ class Database:
         #  print(toPrint)
          
          #select with order by
-         query = "SELECT * FROM Customers ORDER BY CUSTOMER_ID DESC"
+         #query = "SELECT * FROM Customers ORDER BY CUSTOMER_ID DESC"
+        #  toPrint = cursor.execute(query).fetchall()
+        #  print(toPrint)
+         
+         #also show select distinct
+         query = "SELECT DISTINCT CUSTOMER_ID FROM Orders"
          toPrint = cursor.execute(query).fetchall()
          print(toPrint)
     
@@ -102,12 +107,28 @@ class Database:
     def advanced_query(self):
         cursor = self.conn.cursor()
         
-        #query that joins orders, products, and customers into one table on their common ID
+        #inner join query that joins orders, products, and customers into one table on their common ID
         query = "SELECT Orders.ORDER_ID, Products.PRODUCT_CODE, Products.PRODUCT_NAME, Customers.CUSTOMER_NAME, Customers.CUSTOMER_EMAIL FROM Orders INNER JOIN Customers ON Customers.CUSTOMER_ID = Orders.CUSTOMER_ID INNER JOIN Products ON Orders.PRODUCT_CODE = Products.PRODUCT_CODE"
         toPrint = cursor.execute(query).fetchall()
         print(toPrint)
+        
+        #you can also do other kinds of joins left, right, full
+        
+        
     
     #data aggregation
+    def aggregate_data(self):
+        cursor = self.conn.cursor()
+        
+        #count
+        query = "SELECT COUNT(CUSTOMER_ID) FROM Customers"
+        toPrint = cursor.execute(query).fetchall()
+        print(toPrint)
+        
+        #sum
+        #min
+        #max
+        #avg
     
     #our main for testing sake
 if __name__ == "__main__":
@@ -135,8 +156,10 @@ if __name__ == "__main__":
     #updating data in Customers
     #db.update_data()
     
-    #db.query_data()
+    db.query_data()
     
-    db.advanced_query()
+    # db.advanced_query()
+    
+    db.aggregate_data()
     
     
